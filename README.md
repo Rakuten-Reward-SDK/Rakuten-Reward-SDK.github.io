@@ -32,10 +32,15 @@ VitePress compiles the Markdown files into a Vue-based SPA. GitHub Actions build
 │   │       ├── index.mjs           # Extends VitePress default theme
 │   │       └── custom.css          # Brand colour overrides (Rakuten red)
 │   ├── public/
-│   │   └── logo.svg                # Logo served at /logo.svg
+│   │   ├── logo.svg                # Logo served at /logo.svg
+│   │   └── assets/                 # Static image assets
+│   │       ├── android/            # Android screenshots and images
+│   │       ├── ios/                # iOS screenshots and images
+│   │       └── javascript/         # JavaScript screenshots and images
 │   ├── android/
 │   │   ├── index.md                # Basic Setup
 │   │   ├── integration.md
+│   │   ├── login.md
 │   │   ├── mission.md
 │   │   ├── ui.md
 │   │   ├── user-info.md
@@ -82,6 +87,15 @@ All content lives in `docs/` as plain Markdown files. To update a page, edit its
 1. Create a `.md` file in the appropriate platform folder, e.g. `docs/android/my-new-page.md`.
 2. Add it to the sidebar in `docs/.vitepress/config.mjs` under the relevant `items` array.
 3. Push to `master`.
+
+### Adding images
+
+Place image files in `docs/public/assets/<platform>/`, e.g. `docs/public/assets/android/my-image.png`.  
+Reference them in Markdown as `/assets/android/my-image.png`:
+
+```md
+![Alt text](/assets/android/my-image.png)
+```
 
 ### Sidebar and navigation
 

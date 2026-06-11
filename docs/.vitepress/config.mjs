@@ -54,6 +54,7 @@ function androidSidebar() {
       items: [
         { text: 'Basic Setup', link: '/android/' },
         { text: 'Integration', link: '/android/integration' },
+        { text: 'Login', link: '/android/login' },
       ],
     },
     {
