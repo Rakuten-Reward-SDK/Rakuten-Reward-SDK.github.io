@@ -60,8 +60,8 @@ function androidSidebar() {
     {
       text: 'Features',
       items: [
-        { text: 'Mission Achievement', link: '/android/mission' },
         { text: 'Built-in UI', link: '/android/ui' },
+        { text: 'Mission Achievement', link: '/android/mission' },
         { text: 'User Information', link: '/android/user-info' },
       ],
     },
