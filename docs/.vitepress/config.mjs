@@ -38,7 +38,7 @@ export default defineConfig({
     // },
 
     footer: {
-      copyright: 'Copyright © 2024 Rakuten Group, Inc.',
+      copyright: `Copyright © ${new Date().getFullYear()} Rakuten Group, Inc.`,
     },
 
     search: {
