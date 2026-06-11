@@ -11,88 +11,47 @@ Before integrating the SDK, make sure your project meets the following minimum r
 | Compile SDK | API 36 |
 | AndroidX | Required |
 
-## Initialize SDK
+## Gradle Setup
 
-Initialize the SDK in your `Application` class using the App Code provided in the Rakuten Reward Developer Portal.
+### Step 1 — Add the Maven repository
 
-### Option A — AndroidManifest.xml (recommended)
+In your **project-level** `build.gradle`, add the Rakuten Maven URL to the `allprojects` repositories block:
 
-Set your App Code as a `<meta-data>` entry. No manual initialization call is needed.
-
-```xml
-<application>
-    <meta-data
-        android:name="com.rakuten.gap.ads.mission_core.appKey"
-        android:value="{Your App Code}" />
-</application>
-```
-
-### Option B — Application class
-
-Alternatively, call `RakutenReward.init()` directly in your `Application.onCreate()`.
-
-```kotlin
-class App : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        RakutenReward.init("<AppCode>")
+```groovy
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://raw.githubusercontent.com/rakuten-ads/Rakuten-Reward-Native-Android/master/maven"
+        }
     }
 }
 ```
 
-## Start SDK in Activity
+### Step 2 — Add dependencies
 
-The SDK must be bound to the Activity lifecycle. Choose whichever option fits your architecture.
+In your **app-level** `build.gradle`, import the Bill of Materials (BoM) to manage all SDK library versions from a single version number, then declare the modules without specifying individual versions.
 
-### Option 1 — Extend RakutenRewardBaseActivity
+```groovy
+dependencies {
+    // Import the BoM — controls all Reward SDK library versions
+    implementation platform('com.rakuten.android:rewardsdknative-bom:8.2.0')
 
-The simplest approach — extend `RakutenRewardBaseActivity` and the SDK handles the lifecycle automatically.
+    // Core SDK (required)
+    implementation 'com.rakuten.android:rewardsdknative-core'
 
-```kotlin
-class YourActivity : RakutenRewardBaseActivity() {
-    // Nothing else needed
+    // Built-in UI — mission portal, notifications (optional)
+    implementation 'com.rakuten.android:rewardsdknative-ui'
 }
 ```
 
-### Option 2 — Manual lifecycle methods
+::: info ViewBinding & DataBinding
+The `rewardsdknative-ui` module requires ViewBinding and DataBinding. If your app does not already enable them, add the following to your app-level `build.gradle`:
 
-If you cannot extend `RakutenRewardBaseActivity`, call the lifecycle methods manually.
-
-```kotlin
-class YourActivity : Activity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        RakutenRewardLifecycle.onCreate(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        RakutenRewardLifecycle.onStart(this)
-    }
-
-    override fun onResume() {
-        RakutenRewardLifecycle.onResume(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        RakutenRewardLifecycle.onDestroy()
-    }
+```groovy
+buildFeatures {
+    viewBinding true
+    dataBinding true
 }
 ```
-
-### Option 3 — AndroidX lifecycle observer
-
-Using `AppCompatActivity`? Call `bindRakutenRewardIn` in `onCreate` — it observes the lifecycle automatically.
-
-```kotlin
-class YourActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        RakutenRewardManager.bindRakutenRewardIn(this, this)
-    }
-}
-```
+:::
