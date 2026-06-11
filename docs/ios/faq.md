@@ -1,0 +1,4 @@
+# FAQ
+
+::: info Coming soon
+:::

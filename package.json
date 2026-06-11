@@ -1,0 +1,26 @@
+{
+  "name": "rakuten-reward-sdk.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rakuten-Reward-SDK/Rakuten-Reward-SDK.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rakuten-Reward-SDK/Rakuten-Reward-SDK.github.io/issues"
+  },
+  "homepage": "https://github.com/Rakuten-Reward-SDK/Rakuten-Reward-SDK.github.io#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
