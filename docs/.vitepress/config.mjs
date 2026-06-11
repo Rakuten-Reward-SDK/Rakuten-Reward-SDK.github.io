@@ -10,6 +10,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: 'Rakuten Reward SDK',
+    logoLink: 'https://rakuten-reward-sdk.github.io/',
 
     // Top navigation
     nav: [
