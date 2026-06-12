@@ -35,7 +35,7 @@ In your **app-level** `build.gradle`, import the Bill of Materials (BoM) to mana
 ```groovy
 dependencies {
     // Import the BoM — controls all Reward SDK library versions
-    implementation platform('com.rakuten.android:rewardsdknative-bom:8.2.0')
+    implementation platform('com.rakuten.android:rewardsdknative-bom:x.x.x')
 
     // Core SDK (required)
     implementation 'com.rakuten.android:rewardsdknative-core'
@@ -44,6 +44,8 @@ dependencies {
     implementation 'com.rakuten.android:rewardsdknative-ui'
 }
 ```
+
+> Please refer [here](https://github.com/rakuten-ads/Rakuten-Reward-Native-Android) for the latest SDK version.
 
 ::: info ViewBinding & DataBinding
 The `rewardsdknative-ui` module requires ViewBinding and DataBinding. If your app does not already enable them, add the following to your app-level `build.gradle`:

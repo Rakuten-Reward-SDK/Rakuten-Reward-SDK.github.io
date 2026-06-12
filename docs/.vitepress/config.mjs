@@ -82,6 +82,7 @@ function androidSidebar() {
         { text: 'KDoc ↗', link: 'https://rakuten-ads.github.io/products/mission/android/kdoc/8.2.0/index.html', target: '_blank', rel: 'noopener' },
         { text: 'Sample Code ↗', link: 'https://github.com/Rakuten-Reward-SDK/Reward-Native-SDK-Sample-Android', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/android/faq' },
+        { text: 'Version History ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-Native-Android/blob/master/doc/history/README.md', target: '_blank', rel: 'noopener' },
       ],
     },
   ]
