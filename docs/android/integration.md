@@ -85,3 +85,31 @@ class YourActivity : AppCompatActivity() {
     }
 }
 ```
+
+## RakutenRewardListener
+
+`RakutenRewardListener` lets you react to SDK status changes and mission events in your Activity or Fragment.
+
+### Callbacks
+
+| Callback | Triggered when |
+|---|---|
+| `onSDKStatusChanged(status: RakutenRewardSDKStatus)` | SDK status changes |
+| `onUserUpdated(user: RakutenRewardUser)` | User data is updated |
+| `onUnclaimedAchievement(achievement: MissionAchievementData)` | User achieves a mission |
+| `onSDKClaimClosed(achievement: MissionAchievementData, status: RakutenRewardClaimStatus)` | Claim UI is closed |
+| `onSDKClaimPresented(achievement: MissionAchievementData)` | Claim UI is shown |
+| `onSDKConsentPresented()` | Consent dialog is shown |
+| `onSDKConsentClosed()` | Consent dialog is closed |
+
+### Register and unregister
+
+```kotlin
+// Register
+RakutenReward.addRakutenRewardListener(this)
+
+// Unregister
+RakutenReward.removeRakutenRewardListener(this)
+```
+
+> If you register the listener in an Activity or Fragment, always call `removeRakutenRewardListener` when it is destroyed to avoid memory leaks.
