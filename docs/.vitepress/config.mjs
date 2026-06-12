@@ -77,8 +77,10 @@ function androidSidebar() {
     {
       text: 'Reference',
       items: [
-        { text: 'API Reference', link: '/android/api-reference' },
-        { text: 'Migration Guide', link: '/android/migration' },
+        { text: 'RakutenReward', link: '/android/api-rakuten-reward' },
+        { text: 'RakutenRewardCoroutine', link: '/android/api-rakuten-reward-coroutine' },
+        { text: 'KDoc ↗', link: 'https://rakuten-ads.github.io/products/mission/android/kdoc/8.2.0/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'Sample Code ↗', link: 'https://github.com/Rakuten-Reward-SDK/Reward-Native-SDK-Sample-Android', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/android/faq' },
       ],
     },
