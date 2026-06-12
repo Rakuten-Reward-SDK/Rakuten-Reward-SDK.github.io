@@ -63,7 +63,14 @@ function androidSidebar() {
         { text: 'Built-in UI', link: '/android/ui' },
         { text: 'Mission Achievement', link: '/android/mission' },
         { text: 'User Consent', link: '/android/consent' },
-        { text: 'User Information', link: '/android/user-info' },
+      ],
+    },
+    {
+      text: 'Configuration',
+      items: [
+        { text: 'Debugging', link: '/android/debugging' },
+        { text: 'App Locale', link: '/android/app-locale' },
+        { text: 'RakutenRewardConfig', link: '/android/reward-config' },
       ],
     },
     {
