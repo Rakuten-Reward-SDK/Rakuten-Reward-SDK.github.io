@@ -62,6 +62,7 @@ function androidSidebar() {
       items: [
         { text: 'Built-in UI', link: '/android/ui' },
         { text: 'Mission Achievement', link: '/android/mission' },
+        { text: 'User Consent', link: '/android/consent' },
         { text: 'User Information', link: '/android/user-info' },
       ],
     },
