@@ -63,6 +63,7 @@ function androidSidebar() {
         { text: 'Built-in UI', link: '/android/ui' },
         { text: 'Mission Achievement', link: '/android/mission' },
         { text: 'User Consent', link: '/android/consent' },
+        { text: 'JavaScript Extension', link: '/android/js-extension' },
       ],
     },
     {
