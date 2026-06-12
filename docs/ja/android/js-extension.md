@@ -36,4 +36,4 @@ RewardJS.setupWebView("<appCode>", "<domain>", webView)
 
 > WebViewがFragmentにある場合は、そのFragmentの親ActivityでSDKセッションを開始してください。[ActivityでSDKを開始する](./integration#activityでsdkを開始する)を参照してください。
 
-JavaScript側の実装については、[JavaScriptガイド](/ja/javascript/)を参照してください。
+JavaScript側の実装については、[JavaScriptガイド](/javascript/)を参照してください。
