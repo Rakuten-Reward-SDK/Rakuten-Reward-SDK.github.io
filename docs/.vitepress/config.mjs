@@ -21,6 +21,7 @@ export default defineConfig({
         sidebar: {
           '/ja/android/': jaAndroidSidebar(),
           '/ja/ios/': jaIosSidebar(),
+          '/ja/javascript/': jaJsSidebar(),
         },
         docFooter: {
           prev: '前のページ',
@@ -222,6 +223,36 @@ function jaIosSidebar() {
   ]
 }
 
+function jaJsSidebar() {
+  return [
+    {
+      text: 'はじめに',
+      items: [
+        { text: '基本セットアップ', link: '/ja/javascript/' },
+        { text: 'インテグレーション', link: '/ja/javascript/integration' },
+        { text: '認証', link: '/ja/javascript/authentication' },
+      ],
+    },
+    {
+      text: '機能',
+      items: [
+        { text: 'ミッションの達成', link: '/ja/javascript/mission' },
+        { text: 'Built-in UI', link: '/ja/javascript/ui' },
+        { text: 'ユーザー同意', link: '/ja/javascript/consent' },
+        { text: 'JavaScript拡張機能', link: '/ja/javascript/js-extension' },
+      ],
+    },
+    {
+      text: 'リファレンス',
+      items: [
+        { text: 'APIリファレンス', link: '/ja/javascript/api-reference' },
+        { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-JS/blob/main/CHANGELOG.md', target: '_blank', rel: 'noopener' },
+        { text: 'FAQ', link: '/ja/javascript/faq' },
+      ],
+    },
+  ]
+}
+
 function jsSidebar() {
   return [
     {
@@ -229,6 +260,7 @@ function jsSidebar() {
       items: [
         { text: 'Basic Setup', link: '/javascript/' },
         { text: 'Integration', link: '/javascript/integration' },
+        { text: 'Authentication', link: '/javascript/authentication' },
       ],
     },
     {
@@ -236,12 +268,15 @@ function jsSidebar() {
       items: [
         { text: 'Mission Achievement', link: '/javascript/mission' },
         { text: 'Built-in UI', link: '/javascript/ui' },
+        { text: 'User Consent', link: '/javascript/consent' },
+        { text: 'JavaScript Extension', link: '/javascript/js-extension' },
       ],
     },
     {
       text: 'Reference',
       items: [
         { text: 'API Reference', link: '/javascript/api-reference' },
+        { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-JS/blob/main/CHANGELOG.md', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/javascript/faq' },
       ],
     },

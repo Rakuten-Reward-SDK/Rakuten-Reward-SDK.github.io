@@ -42,4 +42,4 @@ JS拡張機能を通じてWebページから呼び出せるReward SDK APIは以�
 | `missionsdk.getUserRewardPoint()` | `RakutenReward.shared.getCurrentMonthPoints` |
 | `missionsdk.getPointHistory()` | `RakutenReward.shared.getPointHistory` |
 
-JavaScript側の実装については、[JavaScript拡張機能ガイド](/javascript/)をご参照ください。
+JavaScript側の実装については、[JavaScript拡張機能ガイド](/ja/javascript/js-extension)をご参照ください。
