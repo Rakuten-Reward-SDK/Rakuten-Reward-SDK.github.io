@@ -20,6 +20,7 @@ export default defineConfig({
         ],
         sidebar: {
           '/ja/android/': jaAndroidSidebar(),
+          '/ja/ios/': jaIosSidebar(),
         },
         docFooter: {
           prev: '前のページ',
@@ -159,15 +160,63 @@ function iosSidebar() {
       items: [
         { text: 'Mission Achievement', link: '/ios/mission' },
         { text: 'Built-in UI', link: '/ios/ui' },
-        { text: 'User Information', link: '/ios/user-info' },
+        { text: 'User Consent', link: '/ios/consent' },
+        { text: 'JavaScript Extension', link: '/ios/js-extension' },
+      ],
+    },
+    {
+      text: 'Configuration',
+      items: [
+        { text: 'Debugging', link: '/ios/debugging' },
+        { text: 'App Language', link: '/ios/app-language' },
+        { text: 'RewardConfiguration', link: '/ios/configuration' },
       ],
     },
     {
       text: 'Reference',
       items: [
         { text: 'API Reference', link: '/ios/api-reference' },
-        { text: 'Migration Guide', link: '/ios/migration' },
+        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.1.0/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS/blob/master/doc/changelog.md', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/ios/faq' },
+      ],
+    },
+  ]
+}
+
+function jaIosSidebar() {
+  return [
+    {
+      text: 'はじめに',
+      items: [
+        { text: '基本セットアップ', link: '/ja/ios/' },
+        { text: 'インテグレーション', link: '/ja/ios/integration' },
+      ],
+    },
+    {
+      text: '機能',
+      items: [
+        { text: 'ミッションの達成', link: '/ja/ios/mission' },
+        { text: 'Built-in UI', link: '/ja/ios/ui' },
+        { text: 'ユーザー同意', link: '/ja/ios/consent' },
+        { text: 'JavaScript拡張機能', link: '/ja/ios/js-extension' },
+      ],
+    },
+    {
+      text: '設定',
+      items: [
+        { text: 'デバッグ', link: '/ja/ios/debugging' },
+        { text: 'アプリの言語', link: '/ja/ios/app-language' },
+        { text: 'RewardConfiguration', link: '/ja/ios/configuration' },
+      ],
+    },
+    {
+      text: 'リファレンス',
+      items: [
+        { text: 'APIリファレンス', link: '/ja/ios/api-reference' },
+        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.1.0/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS/blob/master/doc/changelog.md', target: '_blank', rel: 'noopener' },
+        { text: 'FAQ', link: '/ja/ios/faq' },
       ],
     },
   ]
