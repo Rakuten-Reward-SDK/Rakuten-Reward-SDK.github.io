@@ -2,7 +2,7 @@
 
 ## General
 
-### Reward SDK is written in Java or Kotlin? My app is written in Java — is there any problem?
+### Reward SDK is written in Java or Kotlin? My application is written in Java fully, is there any problem using the Reward SDK?
 
 <details>
 <summary>Answer</summary>
@@ -84,7 +84,18 @@ If you cannot upgrade the SDK version, add the following to your `proguard-rules
 <details>
 <summary>Answer</summary>
 
-The `RakutenAuth` login option is for third-party apps — apps outside of Rakuten that do not use a Rakuten login SDK. It allows those apps to authenticate users with Rakuten Reward.
+The `RakutenAuth` login option is for third-party apps — apps outside of Rakuten that do not use Rakuten login SDK (RID). Therefore they can use the RakutenAuth login option.
+
+If your app is using Rakuten login SDK already, then you don't need to use this login option.
+
+</details>
+
+### I'm using RID login option, do I have to call `RakutenAuth.logout` API when user logged out?
+
+<details>
+<summary>Answer</summary>
+
+If you are using Reward SDK version <strong>3.1.1</strong> and above, then yes you need to call the logout API regardless of which login options to properly clear the token and data.
 
 </details>
 
@@ -281,6 +292,15 @@ RakutenReward.openSDKPortal(
     }
 )
 ```
+
+</details>
+
+### After I set token using `RakutenReward.setRIdToken` but SDK status is still offline.
+
+<details>
+<summary>Answer</summary>
+
+After setting the token, need to manually trigger to start SDK session by calling the following API. <br>
 
 </details>
 

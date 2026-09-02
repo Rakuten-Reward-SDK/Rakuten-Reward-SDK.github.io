@@ -20,7 +20,7 @@ RewardJS.setupWebView("<appCode>", "<domain>", webView)
 ```
 
 | Parameter | Description |
-|---|---|
+| --- | --- |
 | `appCode` | Your application key from the Rakuten Reward Developer Portal |
 | `domain` | The domain of the web page where the JS extension is implemented |
 | `webView` | The `WebView` instance loading the web page |

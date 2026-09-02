@@ -36,4 +36,13 @@ RewardJS.setupWebView("<appCode>", "<domain>", webView)
 
 > WebViewがFragmentにある場合は、そのFragmentの親ActivityでSDKセッションを開始してください。[ActivityでSDKを開始する](./integration#activityでsdkを開始する)を参照してください。
 
+## バージョンマッピング
+
+| BOM   | JS |
+|-------| --- |
+| 8.2.1 | 1.3.0 |
+| 7.6.0 | 1.2.0 |
+| 7.5.0 | 1.1.0 |
+| 6.2.0 | 1.0.0 |
+
 JavaScript側の実装については、[JavaScript拡張機能ガイド](/ja/javascript/js-extension)を参照してください。

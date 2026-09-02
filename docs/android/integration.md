@@ -113,3 +113,34 @@ RakutenReward.removeRakutenRewardListener(this)
 ```
 
 > If you register the listener in an Activity or Fragment, always call `removeRakutenRewardListener` when it is destroyed to avoid memory leaks.
+
+## Version Compatibility
+
+| Version | Minimum SDK | Compile SDK |
+|---------|-------------|-------------|
+| 8.3.0   | API24 (7.0) | API 36      |
+| 8.2.1   | API24 (7.0) | API 36      |
+| 8.2.0   | API24 (7.0) | API 36      |
+| 8.1.0   | API24 (7.0) | API 36      |
+
+## Dependencies
+
+Here's how to use Reward Native Android BoM to declare dependencies. When using the BoM, you don't need to specify versions for individual dependencies.
+
+```groovy
+dependencies {
+  // Import the BoM for the Reward Native platform
+  implementation platform('com.rakuten.android:rewardsdknative-bom:8.3.0')
+
+  // Declare the dependency for the core library
+  implementation 'com.rakuten.android:rewardsdknative-core' 
+}
+```
+
+## Additional Resources
+
+[Event Analytics](./doc/EventAnalytics/README.md)  
+[JavaScript Extension](./doc/extension/README.md)  
+[For Java Developers](./doc/java/README.md)  
+[KDoc](https://rakuten-ads.github.io/products/mission/android/kdoc/8.3.0/index.html)  
+[FAQ](./doc/faq/README.md)

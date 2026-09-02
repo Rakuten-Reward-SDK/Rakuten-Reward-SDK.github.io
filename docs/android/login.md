@@ -63,7 +63,7 @@ RakutenAuth.openLoginPage(context) { result ->
     if (result.resultCode == RESULT_OK) {
         RakutenAuth.handleActivityResult(result.data, object : LoginResultCallback {
             override fun loginSuccess() {
-                // login completed
+                //✅ login completed
             }
 
             override fun loginFailed(e: RakutenRewardAPIError) {
