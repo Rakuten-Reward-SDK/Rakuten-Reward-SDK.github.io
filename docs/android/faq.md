@@ -2,7 +2,7 @@
 
 ## General
 
-### Reward SDK is written in Java or Kotlin? My app is written in Java — is there any problem?
+### Reward SDK is written in Java or Kotlin? My application is written in Java fully, is there any problem using the Reward SDK?
 
 <details>
 <summary>Answer</summary>
