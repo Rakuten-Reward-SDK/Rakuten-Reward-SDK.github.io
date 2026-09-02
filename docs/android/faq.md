@@ -58,7 +58,51 @@ To verify ADID is no longer collected, check for the following log in Logcat:
 
 </details>
 
-### I integrated Reward SDK version 6.1.0 and the app crashes when obfuscation is enabled
+### Build Error - unable to find valid certification path to requested target
+
+I get a build error when importing Reward SDK dependency. How do I resolve this?
+
+![Build error log](/assets/android/build_error_log.png)
+
+<details>
+<summary>Answer</summary>
+
+There are two approaches to fix this issue:
+
+<details>
+<summary>1. Update Gradle JDK</summary>
+
+Update the Gradle JDK in Android Studio:
+
+1. Open Project Structure and go to Gradle Settings
+2. For the JDK, do not use the Android Studio default JDK
+3. If another JDK is available, select it. Otherwise download a new JDK
+4. After downloading, select the new JDK version and click OK
+5. Sync Gradle again
+
+</details>
+
+<details>
+<summary>2. Import CA Certificate</summary>
+
+1. Download the CA certificate from raw.githubusercontent.com by opening the link in Chrome and clicking the lock icon
+2. Locate your Android Studio Gradle JDK location
+3. Run the following commands (replace paths as needed):
+
+```bash
+cd <JDK-location>/Contents/Home
+./bin/keytool -importcert -keystore lib/security/cacerts -storepass changeit -file <cert-path> -alias "github_cert"
+```
+
+4. Restart Android Studio and sync Gradle again
+
+</details>
+
+If neither approach works, please contact the developer team.
+
+</details>
+
+### I've integrated Reward SDK version 6.1.0, and the app crashes when obfuscation is enabled
 
 ![Crash log](/assets/android/crash-log.png)
 
@@ -85,6 +129,27 @@ If you cannot upgrade the SDK version, add the following to your `proguard-rules
 <summary>Answer</summary>
 
 The `RakutenAuth` login option is for third-party apps — apps outside of Rakuten that do not use a Rakuten login SDK. It allows those apps to authenticate users with Rakuten Reward.
+
+</details>
+
+### I'm using RID login option, do I have to call `RakutenAuth.logout` when user logs out?
+
+<details>
+<summary>Answer</summary>
+
+Yes, if you are using Reward SDK version 3.1.1 or above, you need to call the logout API regardless of login option to properly clear tokens and data:
+
+```kotlin
+RakutenAuth.logout(object : LogoutResultCallback {
+    override fun logoutSuccess() {
+        // logout completed
+    }
+
+    override fun logoutFailed(e: RakutenRewardAPIError) {
+        // logout failed
+    }
+})
+```
 
 </details>
 
@@ -280,6 +345,28 @@ RakutenReward.openSDKPortal(
         // portal was closed by the user
     }
 )
+```
+
+</details>
+
+### After I set token using `RakutenReward.setRIdToken` but SDK status is still offline
+
+<details>
+<summary>Answer</summary>
+
+After setting the token, you need to manually trigger a new SDK session by calling:
+
+```kotlin
+RakutenReward.startSession()
+```
+
+Example:
+
+```kotlin
+private fun setToken() {
+    RakutenReward.setRaeToken("token")
+    RakutenReward.startSession() // Available since v3.4.2
+}
 ```
 
 </details>

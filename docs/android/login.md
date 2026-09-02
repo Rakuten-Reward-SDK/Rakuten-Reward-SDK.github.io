@@ -48,6 +48,10 @@ private fun handleActivityResult(data: Intent?) {
 }
 ```
 
+### Using Fragments
+
+You can call `RakutenAuth.openLoginPage()` from a Fragment by providing the Fragment reference. The `onActivityResult()` callback will be triggered in the Fragment class.
+
 ### Using the AndroidX Activity Result API
 
 `startActivityForResult` and `onActivityResult` are deprecated since Android 11 (API 30). You can use the AndroidX Activity Result API instead. Add the following dependency first:

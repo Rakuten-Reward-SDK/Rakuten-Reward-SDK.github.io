@@ -31,6 +31,10 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 }
 ```
 
+### Fragment での使用
+
+Fragmentクラスで `RakutenAuth.openLoginPage()` を使用する場合、Activityの代わりにFragmentの参照を渡してください。Fragment内の `onActivityResult()` でログイン結果を受け取ります。
+
 ### AndroidX Activity Result API
 
 `startActivityForResult` と `onActivityResult` は Android 11（API 30）以降で非推奨になりました。AndroidX Activity Result APIを使用する新しいAPIを提供しています。

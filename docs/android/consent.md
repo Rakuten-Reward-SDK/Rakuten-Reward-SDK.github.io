@@ -6,6 +6,14 @@ Logged-in users must accept the Rakuten Reward SDK terms of service and privacy 
 
 Your app is responsible for deciding when to prompt the user — the SDK will not show the consent dialog on its own.
 
+## Changes to existing API
+
+### USER_NOT_CONSENT status
+A new SDK status `USER_NOT_CONSENT` is returned in `RakutenRewardListener#onSDKStatusChanged` when the user hasn't provided consent yet.
+
+### New listener callback
+`RakutenRewardListener#onSDKConsentClosed()` is triggered whenever a consent dialog is closed.
+
 ## Request consent
 
 Call `requestForConsent` to show the consent dialog. If the user has already consented, the dialog is skipped and the callback returns immediately with `CONSENT_PROVIDED`.
@@ -62,3 +70,19 @@ override fun onSDKStatusChanged(status: RakutenRewardSDKStatus) {
     }
 }
 ```
+
+## Handling mission actions
+
+If you call mission APIs before consent is given, they will fail. Wrap them in a consent check:
+
+```kotlin
+fun logMissionAction() {
+    RakutenReward.requestForConsent { status ->
+        if (status == RakutenRewardConsentStatus.CONSENT_PROVIDED) {
+            RakutenReward.logAction("action1", {}) {}
+        }
+    }
+}
+```
+
+> Note: The `openSDKPortal()` API automatically handles consent. If consent isn't given, it will show the consent dialog first before opening the portal.

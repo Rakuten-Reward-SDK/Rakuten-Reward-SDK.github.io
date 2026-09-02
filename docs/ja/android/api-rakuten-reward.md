@@ -1,85 +1,149 @@
-# RakutenReward
+# APIデータ
 
-`RakutenReward` はReward SDKのメインクラスです。ミッション、ポイント、UI、リスナー管理のコアAPIを提供しています。
-
-## プロパティ
-
-| プロパティ | 説明 |
+## MissionAchievementData
+| パラメータ名 | 説明 |
 |---|---|
-| `version` | 現在のReward SDKのバージョン文字列 |
-| `user` | 現在のユーザーデータ（`RakutenRewardUser`） |
-| `status` | 現在のSDKステータス（`RakutenRewardSDKStatus`） |
-| `lastFailed` | 最後に失敗したAPI呼び出し（`RakutenRewardAPILastCalled`） |
+| name | ミッション名 |
+| iconurl | アイコンのURL |
+| instruction | ミッションの説明 |
+| action | アクションコード(キー) |
+| custom | ミッションのノーティフィケーションがカスタムかどうか |
+| notificationtype | ミッションのノーティフィケーションタイプ |
+| point | ポイント |
+| unclaimed | 未獲得ミッション件数 |
+| achievedDate | ミッション達成日 |
 
-## ミッション
+## MissionData
+| パラメータ名 | 説明 | 例 |
+|---|---|---|
+| name | ミッション名 | Mission A |
+| actionCode | アクションコード | ZIJCjBeQBHac8nJa |
+| iconurl | ミッションアイコンのURL | https://mprewardsdk.blob.core.windows.net/sdk-portal/appCode/actionCode.png |
+| instruction | ミッションの説明文 | 1日1回プレイする |
+| condition | ミッションの達成条件 | 毎日10回達成可能 |
+| notificationtype | ミッションのノーティフィケーションタイプ | NONE, BANNER, MODAL, CUSTOM, BANNER_50, BANNER_250 |
+| point | ミッションのポイント | 10 |
+| enddatestr | ミッションの終了日 <br> 日次の場合 : Today<br> 週次 : 週の終わり<br> 月次 : 月の終わり<br> カスタム : 指定された日時<br> | 20190403 |
+| till | ミッション終了日までの残り日数 | 残り3日 |
+| ext | ミッションのための拡張データ | |
+| reachedCap | ミッション達成が上限に達したかどうか？ | true |
+| times | ミッション達成に必要なアクション数 | 3 |
+| progress | 現在のアクションの状態 | 1 |
 
-| API | 説明 |
+## MissionLiteData
+| パラメータ名 | 説明 | 例 |
+|---|---|---|
+| name | ミッション名 | Mission A |
+| actionCode | アクションコード | ZIJCjBeQBHac8nJa |
+| iconurl | ミッションアイコンのURL | https://mprewardsdk.blob.core.windows.net/sdk-portal/appCode/actionCode.png |
+| instruction | ミッションの説明文 | 1日1回プレイする |
+| condition | ミッションの達成条件 | 毎日10回達成可能 |
+| notificationtype | ミッションのノーティフィケーションタイプ | NONE, BANNER, MODAL, CUSTOM, BANNER_50, BANNER_250 |
+| point | ミッションのポイント | 10 |
+| enddatestr | ミッションの終了日 <br> 日次の場合 : Today<br> 週次 : 週の終わり<br> 月次 : 月の終わり<br> カスタム : 指定された日時<br> | 20190403 |
+| till | ミッション終了日までの残り日数 | 残り3日 |
+| ext | ミッションのための拡張データ | |
+| times | ミッション達成に必要なアクション数 | 3 |
+
+## RakutenRewardPointHistory
+`RakutenRewardPoint` インスタンスのリストになります
+
+## RakutenRewardPoint
+| パラメータ名 | 説明 |
 |---|---|
-| `logAction(actionCode, onSuccess, onFailed)` | ミッションアクションを記録する |
-| `getMissions(onSuccess, onFailed)` | ミッション一覧を取得する |
-| `getMissionsLite(onSuccess, onFailed)` | 軽量版ミッション一覧を取得する |
-| `getMissionDetails(actionCode, onSuccess, onFailed)` | 特定ミッションの詳細を取得する |
-| `getUnclaimedItems(onSuccess, onFailed)` | 未獲得ミッション一覧を取得する |
+| point | ポイント数 |
+| pointdate | ポイント付与月 YYYYMM |
 
-## ポイント
+## RakutenRewardUser
+`RakutenRewardUser` ユーザデータのクラスです
 
-| API | 説明 |
+| パラメータ名 | 説明 |
 |---|---|
-| `getPointHistory(onSuccess, onFailed)` | 直近3ヶ月のポイント履歴を取得する |
-| `memberInfo(onSuccess, onFailed)` | サーバーから最新のメンバー情報を取得する |
+| unclaimed | 未獲得ミッションの数 |
+| signin | ユーザーがサインインしているかどうか？ |
+| point | リワードサービスで取得したポイント |
+| achievementList | ミッションリスト(使用していない) |
 
-## UI
+## Status
 
-| API | 説明 |
+### RakutenRewardSDKStatus
+RakutenRewardSDKStatus は Reward SDK の状態を管理するクラスです
+
+| 名前 | 説明 |
 |---|---|
-| `openSDKPortal(isPortalOpenedCallback, activityResultCallback)` | SDKポータルを開く |
-| `openHelpPage()` | Reward SDKヘルプページを開く |
-| `openTCPage()` | Reward SDK利用規約ページを開く |
-| `openPrivacyPage()` | Reward SDKプライバシーポリシーページを開く |
-| `forceClaimClose()` | クレームUIを強制的に閉じる |
+| ONLINE | SDKの初期化が完了 SDKのメンバー情報が正しく更新された(ポイントおよび未獲得ミッション数) |
+| OFFLINE | SDKの初期化が未完了または失敗 |
+| APPCODEINVALID | アプリケーションキーが間違っている |
+| TOKENEXPIRED | トークンの期限切れ |
+| USER_NOT_CONSENT | ユーザーまだ利用規約に同意しない |
 
-## 同意
-
-| API | 説明 |
+### RakutenRewardClaimStatus
+| Enum | 説明 |
 |---|---|
-| `requestForConsent(callback)` | ユーザーがまだ同意していない場合に同意ダイアログを表示する |
-| `showConsentBanner(callback)` | ユーザーがまだ同意していない場合に同意通知バナーを表示する |
+| NOTYET | まだクレイムしていない |
+| SUCCESS | クレイム成功 |
+| FAIL | クレイム失敗 |
 
-## リスナー
-
-| API | 説明 |
+### RakutenRewardConsentStatus
+| RakutenRewardConsentStatus | 説明 |
 |---|---|
-| `addRakutenRewardListener(listener)` | `RakutenRewardListener` を登録する |
-| `removeRakutenRewardListener(listener)` | `RakutenRewardListener` の登録を解除する |
+| CONSENT_PROVIDED | 同意しました |
+| CONSENT_NOT_PROVIDED | 同意していません |
+| CONSENT_FAILED | APIエラーが発生しました |
+| CONSENT_PROVIDED_RESTART_SESSION_FAILED | 同意しましたが、SDKセッションの再開に失敗しました |
 
-## クッキー
+### RewardApiResult
+`RakutenRewardCoroutine`の戻る値
 
-| API | 説明 |
+#### Success
+| パラメータ名 | 説明 |
 |---|---|
-| `setRp(rp: String)` | Rpクッキーを設定する |
-| `setRz(rz: String)` | Rzクッキーを設定する |
-| `setRa(ra: String)` | Raクッキーを設定する |
+| data | API data object |
 
-## RakutenRewardSDKStatus
-
-| ステータス | 説明 |
+#### Failed
+| パラメータ名 | 説明 |
 |---|---|
-| `ONLINE` | SDKの準備完了。メンバー情報が利用可能 |
-| `OFFLINE` | SDKの準備未完了または初期化失敗 |
-| `APPCODEINVALID` | アプリコードが不正（初期化が400を返した） |
-| `TOKENEXPIRED` | アクセストークンの有効期限切れ |
-| `USER_NOT_CONSENT` | ユーザーがまだ同意していない |
+| error | `RakutenRewardAPIError` |
 
-## RakutenRewardAPIError
-
-| エラー | 説明 |
+### RakutenRewardAPIError
+| Enum | 説明 |
 |---|---|
-| `NETWORKERROR` | ネットワーク接続エラー |
-| `INVALIDREQUEST` | パラメーターが不正 |
-| `TOKENEMPTY` | アクセストークンが未設定 |
-| `SDKNOTACTIVE` | SDKが初期化されていない |
-| `TOKENEXPIRE` | アクセストークンの有効期限切れ |
-| `USER_NOT_CONSENT` | ユーザーが同意していない |
-| `MISSION_REACHED_CAP` | ミッション達成上限に達した |
-| `UNDER_MAINTENANCE` | メンテナンス中 |
-| `UNKNOWN` | 不明なエラー |
+| NETWORKERROR | ネットワークエラー(接続失敗) |
+| APIRESPONSEERROR | ネットワークのレスポンスに問題があった(基本的には起こりません) |
+| TOKENEMPTY | アクセストークンがセットされていない |
+| SDKNOTACTIVE | SDKが初期化されていません |
+| TOKENEXPIRE | アクセストークンの有効期限がきれています <br> アクセストークンをリフレッシュしてください |
+| UNKNOWN | 不明なエラー(基本的には起こりません) |
+| USER_NOT_CONSENT | ユーザーまだ利用規約に同意しない |
+| MISSION_REACHED_CAP | ミッション達成がもう上限に達した |
+| UNDER_MAINTENANCE | 機能はメンテナンス中です |
+
+### Last Failed Method
+SDKはアプリケーションでエラーを処理できるようにAPIが失敗した場合にその詳細を提供します
+
+#### RakutenRewardAPILastCalled
+| Property Name | Description |
+|---|---|
+| method | The last failed API in `RakutenRewardAPI` enum |
+| parameters | Parameters for the API call |
+
+#### RakutenRewardAPI enum
+| 名前 | 説明(関数名) |
+|---|---|
+| MEMBERINFO | memberInfo |
+| LOGACTION | logAction |
+| GETUNCLAIM | getUnclaimedItems |
+| POINTHISTORY | getPointHistory |
+| CLAIM | claim (MissionAchievementData) |
+| GETMISSIONLIST | getMissions |
+| PROVIDE_CONSENT | provideConsent |
+
+### SupportedLocale
+| SupportedLocaleシールドクラス | 説明 |
+|---|---|
+| Japanese | 日本語 |
+| English | 英語 |
+| Korean | 韓国語 |
+| ChineseTraditional | 繁体字中国語 |
+| ChineseSimplified | 簡体字中国語 |
+| OtherLocale | ISO 639言語コードを指定して他のロケールを作成 |

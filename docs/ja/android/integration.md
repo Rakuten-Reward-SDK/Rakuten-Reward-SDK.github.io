@@ -1,5 +1,12 @@
 # インテグレーション
 
+## 前提条件
+
+* Android Studio Arctic Fox 以上
+* Android API level 24 以上
+* Android X をサポート
+* 楽天 IDSDK もしくは SDKが用意するログインを使用する
+
 ## SDKの初期化
 
 `Application` クラスで、楽天リワード開発者ポータルから取得したアプリコードを使ってSDKを初期化します。
@@ -27,6 +34,52 @@ class App : Application() {
         super.onCreate()
         RakutenReward.init("<AppCode>")
     }
+}
+```
+
+## リワードSDKをインポートする
+
+Gradleの依存設定でアプリにインポートすることが出来ます。プロジェクト直下のbuild.gradleのrepositoriesに以下のように参照先を追加する必要があります。
+
+**プロジェクト全体のbuild.gradle サンプル**
+
+```groovy
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://raw.githubusercontent.com/rakuten-ads/Rakuten-Reward-Native-Android/master/maven"
+        }
+    }
+}
+```
+
+次に、アプリ直下のbuild.gradleのdependenciesに以下の指定を追加します。 
+
+### Reward Android BoM（部品構成表）  
+Reward Native Android 部品構成表（部品構成表）は、1 つのバージョン（BoM のバージョン）のみを指定することで、すべてのライブラリ バージョンを管理できます。  
+
+アプリで Reward Native BoM を使用する場合、BoM は BoM のバージョンにマッピングされた個々のライブラリ バージョンを自動的に取得します。アプリで BoM のバージョンを更新すると、アプリで使用するすべてのライブラリが、その BoM のバージョンにマッピングされたバージョンに更新されます。  
+
+Reward Native Android 部品構成表を使用して、モジュール（アプリレベル）の Gradle ファイル（通常は app/build.gradle）で依存関係を宣言する方法は次のとおりです。BoM を使用する場合、依存関係の行にライブラリのバージョンを個別に指定しないでください。  
+```groovy
+dependencies {
+  // Import the BoM for the Reward Native platform
+  implementation platform('com.rakuten.android:rewardsdknative-bom:8.3.0')
+
+  // Declare the dependency for the core library
+  implementation 'com.rakuten.android:rewardsdknative-core' 
+  // Declare the dependency for the built-in UI
+  implementation 'com.rakuten.android:rewardsdknative-ui'
+}
+```  
+
+※ rewardsdknative-ui モジュールは viewbinding と databinding　を使用いたします。  
+もしこちらのモジュールの場合で上記のご利用がない場合, 下記のような記述を build.gradle　に加えてください
+```groovy
+buildFeatures {
+        viewBinding true
+        dataBinding true
 }
 ```
 
