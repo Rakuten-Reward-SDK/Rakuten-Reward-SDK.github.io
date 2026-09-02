@@ -25,9 +25,9 @@ RewardJS.setupWebView("<appCode>", "<domain>", webView)
 | `domain` | The domain of the web page where the JS extension is implemented |
 | `webView` | The `WebView` instance loading the web page |
 
-## Consent Handling (Since 2.1.1)
+## Consent Handling (Since 8.2.1)
 
-Since version 2.1.1, if the user has not yet accepted the Reward Terms of Service, any API call will automatically show the consent dialog before proceeding. The API only executes if the user accepts. If the user declines, the API call is not executed.
+Since version 8.2.1, if the user has not yet accepted the Reward Terms of Service, any API call will automatically show the consent dialog before proceeding. The API only executes if the user accepts. If the user declines, the API call is not executed.
 
 ## Supported APIs
 
