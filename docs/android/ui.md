@@ -38,7 +38,7 @@ RakutenReward.openSDKPortal(
 
 ### Portal screenshots
 
-![Portal screen 1](/assets/android/portal1.png) ![Portal screen 2](/assets/android/portal2.png)
+![Portal screen 1](/assets/android/portal1.png) <img src="/assets/android/portal2.png" alt="Mission List" width="310">
 
 ![Portal screen 3](/assets/android/portal3.png) ![Portal screen 4](/assets/android/portal4.png)
 
