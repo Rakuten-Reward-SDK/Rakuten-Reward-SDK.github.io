@@ -150,30 +150,6 @@ rewardSDKExt.getPointHistory((result) => {
 });
 ```
 
-### Get LinkShare Point History
-
-```javascript
-const requestData = {
-  tenantId: 'your-tenant-id',
-  appName: 'your-app-name'
-};
-rewardSDKExt.getLSPointHistory(requestData, 0, 20, (history) => {
-  console.log('LinkShare Point History:', history);
-});
-```
-
-### Get LinkShare Processing Point
-
-```javascript
-const requestData = {
-  tenantId: 'your-tenant-id',
-  appName: 'your-app-name'
-};
-rewardSDKExt.getLSProcessingPoint(requestData, (points) => {
-  console.log('LinkShare Processing Points:', points); // e.g. 28
-});
-```
-
 ## Error Handling
 
 All SDK methods return a `Promise`. Errors are thrown asynchronously, so you must either `await` the call or use `.catch()`.
@@ -224,8 +200,6 @@ rewardSDKExt.openSpsPortal((result) => {
 | `claimMissionPoint` | `actionCode: string`, `achievedDate: string`, `callback?: (result: ActionResult) => void` | Claim points for completed mission |
 | `getUserRewardPoint` | `callback: (result: SDKResult<number>) => void` | Get user's current reward points |
 | `getPointHistory` | `callback: (result: SDKResult<PointHistoryItem[]>) => void` | Get user's point history |
-| `getLSPointHistory` | `requestData: RewardRedeemRequest`, `offset: number`, `limit: number`, `callback: (result: SDKResult<LSPointHistory>) => void` | Get LinkShare point history with pagination |
-| `getLSProcessingPoint` | `requestData: RewardRedeemRequest`, `callback: (result: SDKResult<number>) => void` | Get LinkShare processing points |
 
 ### PointHistoryItem
 
@@ -233,13 +207,6 @@ rewardSDKExt.openSpsPortal((result) => {
 |---|---|---|
 | `points` | `number` | Points earned in the specific month |
 | `month` | `string` | Month of points earned — format `YYYYMM`, e.g. `202504` |
-
-### RewardRedeemRequest
-
-| Key | Type | Description |
-|---|---|---|
-| `tenantId` | `string` | Tenant ID |
-| `appName` | `string` | Application name |
 
 ::: info Native setup required
 The native app must also complete the WebView setup on its side. See the [Android JavaScript Extension guide](/android/js-extension) or [iOS JavaScript Extension guide](/ios/js-extension).

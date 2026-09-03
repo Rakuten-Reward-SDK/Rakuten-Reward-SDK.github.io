@@ -2,35 +2,6 @@
 
 JavaScript拡張機能ライブラリは、ネイティブのiOSまたはAndroidの `WebView` 内に読み込まれたWebページとネイティブのReward SDK APIを橋渡しします。これにより、WebベースのインターフェースからJavaScriptを通じてネイティブSDKの機能（アクションのログ記録やSDKポータルの起動など）を直接呼び出すことができます。
 
-## 目次
-
-- [インストール](#インストール)
-- [APIメソッド](#apiメソッド)
-  - [プラットフォーム設定](#プラットフォーム設定)
-  - [アクションログ](#アクションログ)
-  - [SDKポータルを開く](#sdkポータルを開く)
-  - [SPSポータルを開く](#spsポータルを開く)
-  - [ミッション一覧（簡易版）を取得](#ミッション一覧簡易版を取得)
-  - [ミッション詳細を取得](#ミッション詳細を取得)
-  - [未請求リストを取得](#未請求リストを取得)
-  - [ミッションポイントを請求](#ミッションポイントを請求)
-  - [ユーザーポイント履歴を取得](#ユーザーポイント履歴を取得)
-  - [ユーザーリワードポイントを取得](#ユーザーリワードポイントを取得)
-  - [LinkShareポイント履歴を取得](#linkshareポイント履歴を取得)
-  - [LinkShare処理中ポイントを取得](#linkshare処理中ポイントを取得)
-- [型定義](#型定義)
-  - [SDKResult](#sdkresult)
-  - [ActionResult](#actionresult)
-  - [MissionLite](#missionlite)
-  - [MissionDetails](#missiondetails)
-  - [UnclaimItem](#unclaimitem)
-  - [PointHistoryItem](#pointhistoryitem)
-  - [RewardRedeemRequest](#rewardredeemrequest)
-  - [LSPointHistory](#lspointhistory)
-  - [LSPointHistoryItem](#lspointhistoryitem)
-- [エラーハンドリング](#エラーハンドリング)
-- [CHANGELOG](./CHANGELOG)
-
 ## インストール
 
 以下の `<script>` タグをページの `<head>` タグ内に追加します：
@@ -265,50 +236,6 @@ rewardSDKExt.getUserRewardPoint((result) => {
 
 ---
 
-### LinkShareポイント履歴を取得
-
-LinkShareテナントのページネーションされたポイント履歴を取得します。
-
-```javascript
-const requestData = {
-  tenantId: 'your-tenant-id',
-  appName: 'your-app-name',
-};
-rewardSDKExt.getLSPointHistory(requestData, 0, 20, (history) => {
-  console.log('LinkShareポイント履歴:', history);
-});
-```
-
-| パラメータ   | 型                                                                                         | 必須 | 説明                      |
-| ----------- | ------------------------------------------------------------------------------------------ | ---- | ------------------------ |
-| requestData | [`RewardRedeemRequest`](#rewardredeemrequest)                                               | はい | テナントIDとアプリケーション名 |
-| offset      | `number`                                                                                   | はい | ページネーションオフセット    |
-| limit       | `number`                                                                                   | はい | 返すアイテム数             |
-| callback    | `(result:` [`SDKResult`](#sdkresult)`<`[`LSPointHistory`](#lspointhistory)`>) => void`     | いいえ | ポイント履歴を受け取るコールバック |
-
----
-
-### LinkShare処理中ポイントを取得
-
-失敗時は-1が返されます。
-
-```javascript
-const requestData = {
-  tenantId: 'your-tenant-id',
-  appName: 'your-app-name',
-};
-rewardSDKExt.getLSProcessingPoint(requestData, (points) => {
-  console.log('LinkShare処理中ポイント:', points); // 28
-});
-```
-
-| パラメータ   | 型                                                                        | 必須 | 説明                         |
-| ----------- | ------------------------------------------------------------------------- | ---- | --------------------------- |
-| requestData | [`RewardRedeemRequest`](#rewardredeemrequest)                              | はい | テナントIDとアプリケーション名 |
-| callback    | `(result:` [`SDKResult`](#sdkresult)`<number>) => void`                   | いいえ | 処理中ポイントを受け取るコールバック |
-
----
-
 ## エラーハンドリング
 
 すべてのSDKメソッドは `Promise` を返します。エラー（プラットフォーム未設定、無効なアプリキー、ネイティブSDKが存在しないなど）は非同期にスローされるため、通常の `try/catch` ブロックではキャッチできません。`await` で呼び出すか、`.catch()` を使用する必要があります。
@@ -441,43 +368,6 @@ rewardSDKExt.openSpsPortal((result) => {
 | points | `number` | その月に獲得したポイント      | `1`        |
 | month  | `string` | ポイントを獲得した月（`YYYYMM` 形式） | `'202504'` |
 
----
-
-### RewardRedeemRequest
-
-[`getLSPointHistory`](#linkshareポイント履歴を取得) と [`getLSProcessingPoint`](#linkshare処理中ポイントを取得) で使用されます。
-
-| キー      | 型       | 説明      |
-| -------- | -------- | -------- |
-| tenantId | `string` | テナントID |
-| appName  | `string` | アプリケーション名 |
-
----
-
-### LSPointHistory
-
-[`getLSPointHistory`](#linkshareポイント履歴を取得) から返されます。
-
-| キー     | 型                                                              | 説明                   |
-| ------- | --------------------------------------------------------------- | --------------------- |
-| total   | `number`                                                        | 履歴アイテムの総数     |
-| offset  | `number`                                                        | 現在のページネーションオフセット |
-| limit   | `number`                                                        | 1ページあたりのアイテム数 |
-| history | [`LSPointHistoryItem`](#lspointhistoryitem)`[]`                 | ポイント履歴アイテムの配列 |
-
----
-
-### LSPointHistoryItem
-
-| キー             | 型        | 説明                                |
-| --------------- | --------- | ---------------------------------- |
-| point           | `number`  | 獲得ポイント                        |
-| advertiser      | `string`  | 広告主名                           |
-| grantDate       | `string`  | ポイント付与日（YYYY-MM-DD形式）    |
-| transactionDate | `string`  | 取引日（YYYY-MM-DD形式）            |
-| orderId         | `string`  | 注文ID                             |
-| tncUrl          | `string`  | 利用規約URL                        |
-| isPointGranted  | `boolean` | ポイントが付与されたかどうか        |
 
 ::: info ネイティブ側のセットアップが必要です
 ネイティブアプリ側でもWebViewのセットアップを完了する必要があります。[Android JavaScript拡張機能ガイド](/android/js-extension)または[iOS JavaScript拡張機能ガイド](/ios/js-extension)をご参照ください。
