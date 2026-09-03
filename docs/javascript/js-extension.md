@@ -9,7 +9,7 @@ Add the following `<script>` tag inside the `<head>` tag of your page:
 ```html
 <script
     type="text/javascript"
-    src="https://portal.reward.rakuten.co.jp/sdk-static/jsext/x.x.x/missionsdk-ext.js">
+    src="https://portal.reward.rakuten.co.jp/sdk-static/jsext/1.3.0/missionsdk-ext.js">
 </script>
 ```
 
@@ -36,29 +36,177 @@ rewardSDKExt.setPlatform('ios');
 ### Log Action
 
 ```javascript
+// Basic usage
 rewardSDKExt.logAction("YOUR_ACTION_CODE");
+
+// With callback
+rewardSDKExt.logAction("YOUR_ACTION_CODE", (result) => {
+  if (result.success) {
+    console.log('Action logged successfully');
+  } else {
+    console.error('Failed:', result.error);
+  }
+});
 ```
 
 ### Open SDK Portal
 
 ```javascript
+// Basic usage
 rewardSDKExt.openSdkPortal();
+
+// With callback
+rewardSDKExt.openSdkPortal((result) => {
+  if (result.success) {
+    console.log('Portal opened');
+  } else {
+    console.error('Failed:', result.error);
+  }
+});
+```
+
+### Open SPS Portal
+
+```javascript
+// Basic usage
+rewardSDKExt.openSpsPortal();
+
+// With callback
+rewardSDKExt.openSpsPortal((result) => {
+  if (result.success) {
+    console.log('SPS portal opened');
+  } else {
+    console.error('Failed:', result.error);
+  }
+});
+```
+
+### Get Mission List (Lite)
+
+```javascript
+rewardSDKExt.getMissionLite((missions) => {
+  missions.forEach((m) => {
+    console.log(m.name, m.actionCode, m.point + 'pt');
+  });
+});
+```
+
+### Get Mission Details
+
+```javascript
+rewardSDKExt.getMissionDetails('daily_login', (mission) => {
+  if (!mission) {
+    console.error('Mission not found');
+    return;
+  }
+  console.log(mission.name, mission.progress + '/' + mission.times, mission.point + 'pt');
+});
+```
+
+### Get Unclaim List
+
+```javascript
+rewardSDKExt.getUnclaimList((items) => {
+  items.forEach((item) => {
+    console.log(item.name, item.point + 'pt unclaimed');
+  });
+});
+```
+
+### Claim Mission Point
+
+```javascript
+// Basic usage
+rewardSDKExt.claimMissionPoint('daily_login', '20260617');
+
+// With callback
+rewardSDKExt.claimMissionPoint('daily_login', '20260617', (result) => {
+  if (result.success) {
+    console.log('Points claimed');
+  } else {
+    console.error('Failed:', result.error);
+  }
+});
 ```
 
 ### Get User Reward Points
 
 ```javascript
-rewardSDKExt.getUserRewardPoint((points) => {
-    console.log('Reward Points:', points); // e.g. 10
+rewardSDKExt.getUserRewardPoint((result) => {
+  if (result.success) {
+    console.log('Reward Points:', result.data); // e.g. 10
+  }
 });
 ```
 
 ### Get Point History
 
 ```javascript
-rewardSDKExt.getPointHistory((history) => {
-    console.log('Points History:', history);
+rewardSDKExt.getPointHistory((result) => {
+  if (result.success) {
+    console.log('Points History:', result.data);
     // [{ points: 1, month: '202504' }, ...]
+  }
+});
+```
+
+### Get LinkShare Point History
+
+```javascript
+const requestData = {
+  tenantId: 'your-tenant-id',
+  appName: 'your-app-name'
+};
+rewardSDKExt.getLSPointHistory(requestData, 0, 20, (history) => {
+  console.log('LinkShare Point History:', history);
+});
+```
+
+### Get LinkShare Processing Point
+
+```javascript
+const requestData = {
+  tenantId: 'your-tenant-id',
+  appName: 'your-app-name'
+};
+rewardSDKExt.getLSProcessingPoint(requestData, (points) => {
+  console.log('LinkShare Processing Points:', points); // e.g. 28
+});
+```
+
+## Error Handling
+
+All SDK methods return a `Promise`. Errors are thrown asynchronously, so you must either `await` the call or use `.catch()`.
+
+### Using async/await
+
+```javascript
+async function openPortal() {
+  try {
+    await rewardSDKExt.openSpsPortal((result) => {
+      if (result.success) {
+        console.log('SPS portal opened successfully');
+      } else {
+        console.warn('SDK returned failure:', result.error);
+      }
+    });
+  } catch (error) {
+    console.error('SDK error:', error);
+  }
+}
+```
+
+### Using Promise .catch()
+
+```javascript
+rewardSDKExt.openSpsPortal((result) => {
+  if (result.success) {
+    console.log('SPS portal opened successfully');
+  } else {
+    console.warn('SDK returned failure:', result.error);
+  }
+}).catch((error) => {
+  console.error('SDK error:', error);
 });
 ```
 
@@ -67,17 +215,31 @@ rewardSDKExt.getPointHistory((history) => {
 | Function | Parameters | Description |
 |---|---|---|
 | `setPlatform` | `'android' \| 'ios'` | Set the platform before calling any API |
-| `logAction` | `actionCode: string` | Trigger the native log action API |
-| `openSdkPortal` | — | Trigger the native API to open the SDK Portal |
-| `getUserRewardPoint` | `callback<number>` | Get the user's current reward points |
-| `getPointHistory` | `callback<PointHistory[]>` | Get the user's point history |
+| `logAction` | `actionCode: string`, `callback?: (result: ActionResult) => void` | Trigger the native log action API |
+| `openSdkPortal` | `callback?: (result: ActionResult) => void` | Open the SDK Portal |
+| `openSpsPortal` | `callback?: (result: ActionResult) => void` | Open the SPS Portal |
+| `getMissionLite` | `callback: (result: SDKResult<MissionLite[]>) => void` | Get lite mission list |
+| `getMissionDetails` | `actionCode: string`, `callback: (result: SDKResult<MissionDetails>) => void` | Get full mission details |
+| `getUnclaimList` | `callback: (result: SDKResult<UnclaimItem[]>) => void` | Get list of unclaimed missions |
+| `claimMissionPoint` | `actionCode: string`, `achievedDate: string`, `callback?: (result: ActionResult) => void` | Claim points for completed mission |
+| `getUserRewardPoint` | `callback: (result: SDKResult<number>) => void` | Get user's current reward points |
+| `getPointHistory` | `callback: (result: SDKResult<PointHistoryItem[]>) => void` | Get user's point history |
+| `getLSPointHistory` | `requestData: RewardRedeemRequest`, `offset: number`, `limit: number`, `callback: (result: SDKResult<LSPointHistory>) => void` | Get LinkShare point history with pagination |
+| `getLSProcessingPoint` | `requestData: RewardRedeemRequest`, `callback: (result: SDKResult<number>) => void` | Get LinkShare processing points |
 
-### PointHistory
+### PointHistoryItem
 
 | Key | Type | Description |
 |---|---|---|
 | `points` | `number` | Points earned in the specific month |
 | `month` | `string` | Month of points earned — format `YYYYMM`, e.g. `202504` |
+
+### RewardRedeemRequest
+
+| Key | Type | Description |
+|---|---|---|
+| `tenantId` | `string` | Tenant ID |
+| `appName` | `string` | Application name |
 
 ::: info Native setup required
 The native app must also complete the WebView setup on its side. See the [Android JavaScript Extension guide](/android/js-extension) or [iOS JavaScript Extension guide](/ios/js-extension).
