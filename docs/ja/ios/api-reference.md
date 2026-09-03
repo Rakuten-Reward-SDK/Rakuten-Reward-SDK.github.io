@@ -43,6 +43,8 @@
 | メソッド | 説明 |
 |---|---|
 | `openPortal(completionHandler:)` | SDKポータルを開きます |
+| `openSpsPortal(rzCookie:completionHandler:)` | SPS ポータルを開く（v8.5.0 以降） |
+| `openSpsPortal(rzCookie:deeplink:completionHandler:)` | ディープリンクで特定の画面を指定して SPS ポータルを開く |
 | `openSupportPage(_:)` | 内蔵ミニブラウザでヘルプ/法的ページを開きます |
 
 ### ユーザー同意

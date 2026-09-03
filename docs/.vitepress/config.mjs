@@ -177,7 +177,7 @@ function iosSidebar() {
       text: 'Reference',
       items: [
         { text: 'API Reference', link: '/ios/api-reference' },
-        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.1.0/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.3.0/index.html', target: '_blank', rel: 'noopener' },
         { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS/blob/master/doc/changelog.md', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/ios/faq' },
       ],
@@ -215,7 +215,7 @@ function jaIosSidebar() {
       text: 'リファレンス',
       items: [
         { text: 'APIリファレンス', link: '/ja/ios/api-reference' },
-        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.1.0/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'API Doc ↗', link: 'https://rakuten-ads.github.io/products/mission/iOS/Native/jazzy/9.3.0/index.html', target: '_blank', rel: 'noopener' },
         { text: 'Changelog ↗', link: 'https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS/blob/master/doc/changelog.md', target: '_blank', rel: 'noopener' },
         { text: 'FAQ', link: '/ja/ios/faq' },
       ],
