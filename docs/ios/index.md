@@ -7,6 +7,7 @@
 | Xcode | 26.2 or later |
 | Swift | 6.x |
 | iOS Deployment Target | 14.0 or later |
+| SDK Version | 9.3.0 |
 
 ### Version Compatibility
 
@@ -34,7 +35,7 @@ Add the SDK as a package dependency in your `Package.swift`:
 dependencies: [
     .package(
         url: "https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS-SPM",
-        .exact("x.x.x")
+        .exact("9.3.0")
     ),
 ]
 ```
@@ -50,7 +51,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/rakuten-ads/Rakuten-Reward-Native-iOS.git'
 
 target 'YourApp' do
-  pod 'RakutenRewardNativeSDK', 'x.x.x'
+  pod 'RakutenRewardNativeSDK', '9.3.0'
 end
 ```
 
@@ -59,7 +60,7 @@ end
 Add the following to your `Cartfile`:
 
 ```
-binary "https://raw.githubusercontent.com/rakuten-ads/Rakuten-Reward-Native-iOS/master/CarthageSpec.json" == x.x.x
+binary "https://raw.githubusercontent.com/rakuten-ads/Rakuten-Reward-Native-iOS/master/CarthageSpec.json" == 9.3.0
 ```
 
 Then fetch and embed the framework:

@@ -29,16 +29,6 @@ RakutenReward.shared.requestForConsent { status in
 }
 ```
 
-### Consent status
-
-| Status | Description |
-|---|---|
-| `.consentProvided` | User has provided consent |
-| `.consentNotProvided` | User has not yet provided consent |
-| `.consentFailed` | API request error |
-| `.consentProvidedRestartSessionFailed` | User consented but session restart failed |
-| `.consentUIAlreadyPresented` | The dialog is currently on screen |
-
 ## Consent Notification Banner
 
 As a lighter prompt, you can show a banner instead. The banner only appears when consent has not yet been provided — tapping it opens the full consent dialog.
@@ -74,3 +64,7 @@ RakutenReward.shared.didUpdateStatus = { status in
     }
 }
 ```
+
+## Consent Status Reference
+
+| Status | Meaning |

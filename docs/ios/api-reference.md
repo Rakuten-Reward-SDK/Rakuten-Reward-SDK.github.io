@@ -43,6 +43,8 @@ The main entry point for all SDK operations. Access via `RakutenReward.shared`.
 | Method | Description |
 |---|---|
 | `openPortal(completionHandler:)` | Open the SDK Portal |
+| `openSpsPortal(rzCookie:completionHandler:)` | Open the SPS Portal (v8.5.0+) |
+| `openSpsPortal(rzCookie:deeplink:completionHandler:)` | Open the SPS Portal at a specific destination via deeplink |
 | `openSupportPage(_:)` | Open a help/legal page in the mini browser |
 
 ### User Consent
@@ -70,8 +72,10 @@ The main entry point for all SDK operations. Access via `RakutenReward.shared`.
 |---|---|
 | `status` | Current `RakutenRewardStatus` |
 | `appCode` | Application code (read-only after init) |
-| `tokenType` | Token type (`.rakutenAuth`) |
+| `tokenType` | Token type (`.rid`, `.rakutenAuth`) |
 | `region` | SDK region (`.japan`) |
+| `environment` | `.staging` or `.production` |
+| `blacklistURLs` | URLs the SDK will not access |
 
 ---
 
